@@ -120,12 +120,12 @@ npm install --save-dev nodemon
 
 ## Comandos mais usados GIT:
 
-`git status`
-`git add .`
-`git commit -m "texto com a alteraçãodo comiit"`
-`git push origin nome-branch`
+* `git status`
+* `git add .`
+* `git commit -m "texto com a alteraçãodo comiit"`
+* `git push origin nome-branch`
 
-
+### branch ofcial: main 
 
 ## Autores
 
