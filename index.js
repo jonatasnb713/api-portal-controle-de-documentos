@@ -1,8 +1,10 @@
 const express = require("express");
 const multer = require("multer");
 
+
+
 // @pending criar Models.
-// const { Clients } = require("./models");
+const { Cliente } = require("./clientes");
 // const { Documents } = require("./models");
 // const { Users } = require("./models");
 
@@ -31,88 +33,88 @@ app.get("/", (req, res) => {
 });
 
 
-// const logado = true;
-// function interceptadorGenerico(req, res, next) {
-//   console.log("Passou por aqui antes da resposta");
-//   if (logado === true) {
-//     next();
-//   } else {
-//     res.status(401).json({ response: "You shall not pass!" });
-//   }
-// }
+const logado = true;
+function interceptadorGenerico(req, res, next) {
+  console.log("Passou por aqui antes da resposta");
+  if (logado === true) {
+    next();
+  } else {
+    res.status(401).json({ response: "You shall not pass!" });
+  }
+}
 
-// app.get("/alunos", interceptadorGenerico, async (req, res) => {
-//   try {
-//     const alunos = await Aluno.findAll();
-//     res.json(alunos);
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).json(err);
-//   }
-// });
+app.get("/clientes", interceptadorGenerico, async (req, res) => {
+  try {
+    const clientes = await Client.findAll();
+    res.json(clientes);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json(err);
+  }
+});
 
-// app.get("/alunos/:id", async (req, res) => {
-//   const { id } = req.params;
+app.get("/clientes/:id", async (req, res) => {
+  const { id } = req.params;
 
-//   try {
-//     const aluno = await Aluno.findOne({
-//       where: { id },
-//     });
-//     res.json(aluno);
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).json(err);
-//   }
-// });
+  try {
+    const clientee = await Client.findOne({
+      where: { id },
+    });
+    res.json(clientee);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json(err);
+  }
+});
 
-// app.post("/alunos", upload.single("avatar"), async (req, res) => {
-//   console.log(`avatar`, req.file);
+app.post("/clientes", upload.single("avatar"), async (req, res) => {
+  console.log(`avatar`, req.file);
 
-//   try {
-//     const newAluno = await Aluno.create({
-//       name: req.body.name,
-//       email: req.body.email,
-//     });
-//     res.json(newAluno);
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).json(err);
-//   }
-// });
+  try {
+    const newClient = await Client.create({
+      name: req.body.name,
+      email: req.body.email,
+    });
+    res.json(newClient);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json(err);
+  }
+});
 
-// app.put("/alunos/:id", async (req, res) => {
-//   const { id } = req.params;
+app.put("/clientes/:id", async (req, res) => {
+  const { id } = req.params;
 
-//   try {
-//     const updatedAluno = await Aluno.update(
-//       {
-//         name: req.body.name,
-//         email: req.body.email,
-//       },
-//       {
-//         where: { id },
-//       }
-//     );
-//     res.json(updatedAluno);
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).json(err);
-//   }
-// });
+  try {
+    const updatedClient = await Client.update(
+      {
+        name: req.body.name,
+        email: req.body.email,
+      },
+      {
+        where: { id },
+      }
+    );
+    res.json(updatedClient);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json(err);
+  }
+});
 
-// app.delete("/alunos/:id", async (req, res) => {
-//   const { id } = req.params;
+app.delete("/clientes/:id", async (req, res) => {
+  const { id } = req.params;
 
-//   try {
-//     const deletedAluno = await Aluno.destroy({
-//       where: { id },
-//     });
-//     res.json(deletedAluno);
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).json(err);
-//   }
-// });
+  try {
+    const deletedClient = await Client.destroy({
+      where: { id },
+    });
+    res.json(deletedClient);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json(err);
+  }
+});
 
 app.listen(port, function () {
   console.log(`Server running at http://localhost:${port}/`);
