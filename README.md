@@ -34,44 +34,6 @@ Back-End da ABP referente a disciplina de Tópicos Especiais.
 * api/documents/:id (alterar: PUT)
 * api/documents/:id (delete: DELETE)
 
-## DADOS da API
-
-### DADOS Usuários:
-
-* Nome Completo                 (String)
-* Telefone Para Contato         (Number)
-* CPF                           (Number)
-* Endereço                      (String)
-* Bairro                        (String)
-* Cidade                        (String)
-* Estado                        (String)
-* E-mail                        (String)
-
-### DADOS Cliente:
-
-* Razão Social                  (String)
-* Nome Fantasia                 (String)
-* Inscrição Estadual            (String)
-* Inscrição Municipal           (String)
-* CNPJ                          (Number)
-* Endereço                      (String)
-* Bairro                        (String)
-* Cidade                        (String)
-* Estado                        (String)
-* CEP                           (Number)
-* Telefone Para Contato         (Number)
-* E-Mail                        (String)
-* Data do Cadastro              (??????)
-
-### DADOS Documento:
-
-* Titulo                        (String)
-* Documento                     (??????)
-* Data Do Cadastro              (??????)
-* Assunto Do Documento          (String)
-* ID (não é feita pelo usuario) (??????)
-
-
 ## Dependências do projeto 
 
 * Como ja foi adicionado no arquivo package.json, basta rodar o comando `npm install`, mas segue abaixo as dependências:
@@ -104,16 +66,18 @@ npm install --save-dev nodemon
 }
  ```
 
+
 ### Comandos Sequelize para criar as tabelas:
 
 * Users: @pending adicionar atributos:
-`npx sequelize-cli model:generate --name Users --attributes name:string,email:string `
+`npx sequelize-cli model:generate --name Users --attributes nome:string,sobrenome:string,telefone:integer,cpf:integer,endereco:string,bairro:string,cidade:string,estado:string,email:string,email_recuperacao:string,token:string`
 
 * Clientes: @pending adicionar atributos:
-`npx sequelize-cli model:generate --name Clients --attributes name:string,email:string `
+`npx sequelize-cli model:generate --name Clients --attributes razao_social:string,nome_fantasia:string,inscricao_estadual:string,inscricao_municipal:string,cnpj:integer,endereco:string,bairro:string,cidade:string,estado:string,cep:integer,telefone_para_contato:integer,email:string`
 
-* Documents: @pending adicionar atributos: 
-`npx sequelize-cli model:generate --name Documents --attributes name:string,email:string `
+* Documents: @pending adicionar atributos:
+`npx sequelize-cli model:generate --name Documents --attributes nome:string,descricao:string,client_id:integer,data_validade:date,categoria:string,filename:string,path:string`
+
 
 * Comando para gerar: `npx sequelize-cli db:migrate`
 

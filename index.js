@@ -4,7 +4,7 @@ const multer = require("multer");
 
 
 // @pending criar Models.
-const { Cliente } = require("./clientes");
+const { Clients } = require("./models");
 // const { Documents } = require("./models");
 // const { Users } = require("./models");
 
@@ -43,35 +43,35 @@ function interceptadorGenerico(req, res, next) {
   }
 }
 
-app.get("/clientes", interceptadorGenerico, async (req, res) => {
+app.get("/clients", interceptadorGenerico, async (req, res) => {
   try {
-    const clientes = await Client.findAll();
-    res.json(clientes);
+    const clients = await Clients.findAll();
+    res.json(clients);
   } catch (err) {
     console.error(err);
     res.status(500).json(err);
   }
 });
 
-app.get("/clientes/:id", async (req, res) => {
+app.get("/clients/:id", async (req, res) => {
   const { id } = req.params;
 
   try {
-    const clientee = await Client.findOne({
+    const client = await Clients.findOne({
       where: { id },
     });
-    res.json(clientee);
+    res.json(client);
   } catch (err) {
     console.error(err);
     res.status(500).json(err);
   }
 });
 
-app.post("/clientes", upload.single("avatar"), async (req, res) => {
+app.post("/clients", upload.single("avatar"), async (req, res) => {
   console.log(`avatar`, req.file);
 
   try {
-    const newClient = await Client.create({
+    const newClient = await Clients.create({
       name: req.body.name,
       email: req.body.email,
     });
@@ -82,11 +82,11 @@ app.post("/clientes", upload.single("avatar"), async (req, res) => {
   }
 });
 
-app.put("/clientes/:id", async (req, res) => {
+app.put("/clients/:id", async (req, res) => {
   const { id } = req.params;
 
   try {
-    const updatedClient = await Client.update(
+    const updatedClient = await Clients.update(
       {
         name: req.body.name,
         email: req.body.email,
@@ -102,11 +102,11 @@ app.put("/clientes/:id", async (req, res) => {
   }
 });
 
-app.delete("/clientes/:id", async (req, res) => {
+app.delete("/clients/:id", async (req, res) => {
   const { id } = req.params;
 
   try {
-    const deletedClient = await Client.destroy({
+    const deletedClient = await Clients.destroy({
       where: { id },
     });
     res.json(deletedClient);
