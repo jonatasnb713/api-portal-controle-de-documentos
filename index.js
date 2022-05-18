@@ -1,8 +1,6 @@
 const express = require("express");
 const multer = require("multer");
 
-
-
 // @pending criar Models.
 const { Clients } = require("./models");
 // const { Documents } = require("./models");
@@ -42,7 +40,7 @@ function interceptadorGenerico(req, res, next) {
     res.status(401).json({ response: "You shall not pass!" });
   }
 }
-
+// OK
 app.get("/clients", interceptadorGenerico, async (req, res) => {
   try {
     const clients = await Clients.findAll();
@@ -52,7 +50,7 @@ app.get("/clients", interceptadorGenerico, async (req, res) => {
     res.status(500).json(err);
   }
 });
-
+// OK
 app.get("/clients/:id", async (req, res) => {
   const { id } = req.params;
 
@@ -66,14 +64,23 @@ app.get("/clients/:id", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
-app.post("/clients", upload.single("avatar"), async (req, res) => {
-  console.log(`avatar`, req.file);
+// OK
+app.post("/clients", async (req, res) => {
 
   try {
     const newClient = await Clients.create({
-      name: req.body.name,
-      email: req.body.email,
+      razao_social: req.body.razao_social,
+      nome_fantasia: req.body.nome_fantasia,
+      inscricao_estadual: req.body.inscricao_estadual,
+      inscricao_municipal: req.body.inscricao_municipal,
+      cnpj: req.body.cnpj,
+      endereco: req.body.endereco,
+      bairro: req.body.bairro,
+      cidade: req.body.cidade,
+      estado: req.body.estado,
+      cep: req.body.cep,
+      telefone: req.body.telefone,
+      email: req.body.email
     });
     res.json(newClient);
   } catch (err) {
@@ -81,19 +88,27 @@ app.post("/clients", upload.single("avatar"), async (req, res) => {
     res.status(500).json(err);
   }
 });
-
+// OK
 app.put("/clients/:id", async (req, res) => {
   const { id } = req.params;
 
   try {
-    const updatedClient = await Clients.update(
-      {
-        name: req.body.name,
-        email: req.body.email,
-      },
-      {
-        where: { id },
-      }
+    const updatedClient = await Clients.update({
+      razao_social: req.body.razao_social,
+      nome_fantasia: req.body.nome_fantasia,
+      inscricao_estadual: req.body.inscricao_estadual,
+      inscricao_municipal: req.body.inscricao_municipal,
+      cnpj: req.body.cnpj,
+      endereco: req.body.endereco,
+      bairro: req.body.bairro,
+      cidade: req.body.cidade,
+      estado: req.body.estado,
+      cep: req.body.cep,
+      telefone: req.body.telefone,
+      email: req.body.email
+    }, {
+      where: { id },
+    }
     );
     res.json(updatedClient);
   } catch (err) {
@@ -101,7 +116,7 @@ app.put("/clients/:id", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
+// OK
 app.delete("/clients/:id", async (req, res) => {
   const { id } = req.params;
 

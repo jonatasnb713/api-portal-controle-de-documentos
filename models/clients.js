@@ -18,13 +18,13 @@ module.exports = (sequelize, DataTypes) => {
     nome_fantasia: DataTypes.STRING,
     inscricao_estadual: DataTypes.STRING,
     inscricao_municipal: DataTypes.STRING,
-    cnpj: DataTypes.INTEGER,
+    cnpj: DataTypes.STRING,
     endereco: DataTypes.STRING,
     bairro: DataTypes.STRING,
     cidade: DataTypes.STRING,
     estado: DataTypes.STRING,
-    cep: DataTypes.INTEGER,
-    telefone_para_contato: DataTypes.INTEGER,
+    cep: DataTypes.STRING,
+    telefone: DataTypes.INTEGER,
     email: DataTypes.STRING
   }, {
     sequelize,
